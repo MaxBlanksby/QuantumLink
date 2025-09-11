@@ -6,8 +6,8 @@ public class HeavyHex implements Layout{
     }
 
     @Override
-    public Qubit getQubit(int id) {
-        throw new UnsupportedOperationException("Unimplemented method 'getQubit'");
+    public int getMostNumOfNeighbors() {
+        return 3; 
     }
 
 }

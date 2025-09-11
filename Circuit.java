@@ -16,4 +16,17 @@ public class Circuit {
         return circuitId;
     }
 
+
+    public int getCost(Qubit qubit, Layout layout) {
+
+        layout.getLayoutName();
+        qubit.getTypeName();
+        qubit.getNativeGatesSet();
+
+
+
+
+        return 0;
+    }
+
 }

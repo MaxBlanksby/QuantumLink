@@ -7,7 +7,8 @@ public class Solution {
         System.out.println("Considering qubit: " + qubit.getTypeName());
         System.out.println("With circuit: " + circuit.getCircuitId());
 
-
-
+        // Example logic (to be replaced with actual implementation)
+        int cost = circuit.getCost(qubit, layout);
+        System.out.println("Estimated cost for layout " + layout.getLayoutName() + " is: " + cost);
     }
 }
