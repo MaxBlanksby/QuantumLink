@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class Gate {
 
     private String gateId;
@@ -5,8 +6,7 @@ public class Gate {
 
     int depth;
 
-    int startQubit;
-    int endQubit;
+    ArrayList<Integer> qubitsInvolved;
 
     public String getGateId() {
         return gateId;
@@ -21,11 +21,11 @@ public class Gate {
     }
 
     public int getStartQubit() {
-        return startQubit;
+        return qubitsInvolved.get(0);
     }
 
     public int getEndQubit() {
-        return endQubit;
+        return qubitsInvolved.get(qubitsInvolved.size() - 1);
     }
 
 
