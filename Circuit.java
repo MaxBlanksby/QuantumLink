@@ -17,7 +17,7 @@ public class Circuit {
     }
 
 
-    public int getCost(Qubit qubit, Layout layout) {
+    public int getCost(QubitType qubit, Layout layout) {
 
         layout.getLayoutName();
         qubit.getTypeName();

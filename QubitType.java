@@ -1,10 +1,8 @@
 import java.util.List;
 
-public interface Qubit {
+public interface QubitType {
 
     String getTypeName();
-
-    List<Qubit> getNeighbors();
 
     List<String> getNativeGatesSet();
 
