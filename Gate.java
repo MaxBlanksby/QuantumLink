@@ -6,7 +6,10 @@ public class Gate {
 
     int depth;
 
-    ArrayList<Integer> qubitsInvolved;
+    ArrayList<Integer> inputQubits;
+
+    ArrayList<Integer> outputQubits;
+
 
     public String getGateId() {
         return gateId;
@@ -20,13 +23,6 @@ public class Gate {
         return depth;
     }
 
-    public int getStartQubit() {
-        return qubitsInvolved.get(0);
-    }
-
-    public int getEndQubit() {
-        return qubitsInvolved.get(qubitsInvolved.size() - 1);
-    }
 
 
 }
