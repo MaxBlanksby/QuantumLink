@@ -2,7 +2,12 @@ import java.util.ArrayList;
 public class Gate {
 
     private String gateId;
+
     private String gateType;
+
+    ArrayList<String> typeInput;
+    ArrayList<String> typeOutput;
+
 
     int depth;
 

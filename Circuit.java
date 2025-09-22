@@ -19,8 +19,7 @@ public class Circuit {
 
     public int getCost(QubitType qubit, Layout layout) {
 
-        layout.getLayoutName();
-        qubit.getTypeName();
+        
         qubit.getNativeGatesSet();
 
         int cost = 0;
@@ -37,11 +36,6 @@ public class Circuit {
 
        return cost;
 
-
-
-
-
-   
     }
 }
 
