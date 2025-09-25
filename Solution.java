@@ -15,22 +15,17 @@ public class Solution {
 
 
 
-        
-        int costHeavy = circuit.getCost(new SuperconductingQubit(), new HeavyHex());
-        int costMesh = circuit.getCost(new SuperconductingQubit(), new Mesh());
+
+        ListOfCosts.add(circuit.getCost(new SuperconductingQubit(), new HeavyHex()));
+        ListOfCosts.add(circuit.getCost(new SuperconductingQubit(), new Mesh()));
 
 
 
-        ListOfCosts.add(costHeavy);
-        ListOfCosts.add(costMesh);
-
-    
+        int placeOfCost = Collections.min(ListOfCosts);
+        int cost = ListOfCosts.get(placeOfCost);
 
 
-        int cost = Collections.min(ListOfCosts);
-
-
-
-        System.out.println("Estimated cost for circuit " + circuit.getCircuitId() + " with layout " + (cost == costHeavy ? new HeavyHex().getLayoutName() : new Mesh().getLayoutName()) + " with qubit " + new SuperconductingQubit().getTypeName() + " is: " + cost);
+        System.out.println("The best cost is: " + cost);
+        //System.out.println("The best layout is: " + ListOfCosts.get(placeOfCost));
     }
 }

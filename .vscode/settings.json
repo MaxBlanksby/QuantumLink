@@ -1,0 +1,9 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/Users/maxblanksby/Desktop/quantum work/code/jackson-core-2.20.0.jar",
+        "/Users/maxblanksby/Desktop/quantum work/code/jackson-databind-2.20.0.jar",
+        "/Users/maxblanksby/Desktop/quantum work/code/jackson-annotations-2.20.0.jar",
+        "/Users/maxblanksby/Desktop/quantum work/code/jackson-annotations-2.20.jar"
+    ]
+}

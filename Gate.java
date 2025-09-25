@@ -6,6 +6,7 @@ public class Gate {
     private String gateType;
 
     ArrayList<String> typeInput;
+    
     ArrayList<String> typeOutput;
 
 
