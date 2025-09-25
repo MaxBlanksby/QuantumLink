@@ -15,14 +15,30 @@ public class InputParser {
     }
 
 
-    
+
     public Circuit parseJSON(String filePath) {
         ObjectMapper mapper = new ObjectMapper();
+        Circuit circuit = new Circuit();
+
         try {
             JsonNode root = mapper.readTree(new File(filePath));
-            root.get("cols");
+            System.out.println(root.get("cols").get(1));
 
-            return new Circuit();
+
+            for (int i = 0; i < root.get("cols").size(); i++) {
+                JsonNode gate = root.get("cols").get(i);
+                
+
+
+         
+            }
+
+
+             //System.out.println(root.toString());
+
+
+
+            return circuit;
 
             
         } catch (IOException e) {
