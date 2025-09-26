@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class InputParser {
 
@@ -18,19 +17,25 @@ public class InputParser {
 
     public Circuit parseJSON(String filePath) {
         ObjectMapper mapper = new ObjectMapper();
+
+
         Circuit circuit = new Circuit();
+        circuit.circuitId = filePath;
+        
+        ArrayList<Gate> gates = new ArrayList<>();
 
         try {
             JsonNode root = mapper.readTree(new File(filePath));
-            System.out.println(root.get("cols").get(1));
+            System.out.println(root.get("cols").get(1).get(0));
 
 
-            for (int i = 0; i < root.get("cols").size(); i++) {
-                JsonNode gate = root.get("cols").get(i);
-                
-
-
-         
+            for (int depth = 0; depth < root.get("cols").size(); depth++) {
+                for(int iterator = 0; iterator < root.get("cols").get(depth).size(); iterator++){
+                    JsonNode gate = root.get("cols").get(depth).get(iterator);
+                    System.out.println(gate);
+                }
+                JsonNode col = root.get("cols").get(depth);
+                //System.out.println(col);
             }
 
 

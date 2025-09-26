@@ -4,16 +4,21 @@ public class Circuit {
 
     int numQubits;
 
-    int depth;
-
     ArrayList<Gate> gates;
 
-    int circuitId;
+    String circuitId;
 
 
 
-    public int getCircuitId() {
+    public String getCircuitId() {
         return circuitId;
+    }
+
+
+    Circuit() {
+        this.numQubits = 0;
+        this.gates = new ArrayList<>();
+        this.circuitId = "";
     }
 
 
