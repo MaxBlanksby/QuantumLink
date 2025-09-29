@@ -3,7 +3,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class InputParser {
@@ -18,7 +17,7 @@ public class InputParser {
 
     public Circuit parseJSON(String filePath) {
         ObjectMapper mapper = new ObjectMapper();
-        ArrayList<Column> customGateList = new ArrayList<>();
+        //ArrayList<Column> customGateList = new ArrayList<>();
         ArrayList<Column> columns = new ArrayList<>();
         try {
             
@@ -32,7 +31,7 @@ public class InputParser {
             //     }
             // }
 
-            
+
             int holder = Integer.MIN_VALUE;
             for (int depth = 0; depth < root.get("cols").size(); depth++) {
                 JsonNode colNode = root.get("cols").get(depth);
