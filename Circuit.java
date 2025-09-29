@@ -1,10 +1,11 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Circuit {
 
     int numQubits;
 
-    ArrayList<Gate> gates;
+    ArrayList<Column> columns;
 
     String circuitId;
 
@@ -17,29 +18,29 @@ public class Circuit {
 
     Circuit() {
         this.numQubits = 0;
-        this.gates = new ArrayList<>();
         this.circuitId = "";
+        this.columns = new ArrayList<>();
     }
 
 
     public int getCost(QubitType qubit, Layout layout) {
 
         
-        qubit.getNativeGatesSet();
+        // qubit.getNativeGatesSet();
 
-        int cost = 0;
-        int gateSize = 0;
-        int largestNumNeighbor = layout.getMostNumOfNeighbors();
-        for (int i = 0; i < gates.size(); i++) {
-           Gate gate = gates.get(i);
-            gateSize = gate.inputQubits.size() + gate.outputQubits.size();
-           if (gateSize > largestNumNeighbor) {
-            cost += 6 * (gateSize - largestNumNeighbor);
-           } 
+        // int cost = 0;
+        // int gateSize = 0;
+        // int largestNumNeighbor = layout.getMostNumOfNeighbors();
+        // for (int i = 0; i < gates.size(); i++) {
+        //    Gate gate = gates.get(i);
+        //     gateSize = gate.inputQubits.size() + gate.outputQubits.size();
+        //    if (gateSize > largestNumNeighbor) {
+        //     cost += 6 * (gateSize - largestNumNeighbor);
+        //    } 
 
-        }
+        // }
 
-       return cost;
+       return 0;
 
     }
 }

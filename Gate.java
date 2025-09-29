@@ -1,34 +1,16 @@
-import java.util.ArrayList;
 public class Gate {
-
-    private String gateId;
 
     private String gateType;
 
-    ArrayList<String> typeInput;
-    
-    ArrayList<String> typeOutput;
-
-
-    int depth;
-
-    ArrayList<Integer> inputQubits;
-
-    ArrayList<Integer> outputQubits;
-
-
-    public String getGateId() {
-        return gateId;
+    Gate(String gateType) {
+        this.gateType = gateType;
     }
-
     public String getGateType() {
         return gateType;
     }
 
-    public int getDepth() {
-        return depth;
+    @Override
+    public String toString() {
+    return gateType;
     }
-
-
-
 }

@@ -3,6 +3,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class InputParser {
@@ -17,32 +18,34 @@ public class InputParser {
 
     public Circuit parseJSON(String filePath) {
         ObjectMapper mapper = new ObjectMapper();
-
-
-        Circuit circuit = new Circuit();
-        circuit.circuitId = filePath;
-        
-        ArrayList<Gate> gates = new ArrayList<>();
-
+        ArrayList<Column> customGateList = new ArrayList<>();
+        ArrayList<Column> columns = new ArrayList<>();
         try {
+            
             JsonNode root = mapper.readTree(new File(filePath));
-            System.out.println(root.get("cols").get(1).get(0));
-
-
+            Circuit circuit = new Circuit();
+            circuit.circuitId = filePath;
+            // needs to work for all custon circuits
+            // for (int i = 0; i < root.get("gates").size(); i++) {
+            //     for (JsonNode col : root.get("gates").get(i).get("cols")) {
+            //         //this now iterates through each col of the custom circuit they have made
+            //     }
+            // }
             for (int depth = 0; depth < root.get("cols").size(); depth++) {
-                for(int iterator = 0; iterator < root.get("cols").get(depth).size(); iterator++){
-                    JsonNode gate = root.get("cols").get(depth).get(iterator);
-                    System.out.println(gate);
+                JsonNode colNode = root.get("cols").get(depth);
+                Column col = convertJsonNodeToColumn(colNode, depth); 
+                columns.add(col);
+
+                int holder = Integer.MIN_VALUE;
+                int numQubits = col.getCells().size();
+
+                if (numQubits > holder) {
+                    holder = numQubits;
                 }
-                JsonNode col = root.get("cols").get(depth);
-                //System.out.println(col);
+                circuit.numQubits = holder;
             }
 
-
-             //System.out.println(root.toString());
-
-
-
+            circuit.columns = columns;
             return circuit;
 
             
@@ -53,7 +56,24 @@ public class InputParser {
     }
 
 
+    public Column convertJsonNodeToColumn(JsonNode colNode , int depthX) {
+        Column col = new Column();
+        for(int l = 0; l < colNode.size(); l++){
+            //System.out.println(colNode.get(l));
+            Gate gate = convertJsonNodeToGate(colNode.get(l));
+            //System.out.println(gate);
+            int depthY = l;
+            Cell cell = new Cell(gate, depthX, depthY);
 
+            col.addCell(cell);
+        }
+        return col;
+    }
+
+    
+    public Gate convertJsonNodeToGate(JsonNode gateNode) {
+        return new Gate(gateNode.asText());
+    }
 }
 
     
@@ -61,29 +81,4 @@ public class InputParser {
 
 
 
-
-        // JSONParser parser = new JSONParser();
-
-
-        // try {
-        //     Object obj = parser.parse(new FileReader("data.json"));
-        //     JSONObject jsonObject = (JSONObject) obj;
-
-        //     // Accessing data
-        //     String name = (String) jsonObject.get("name");
-        //     long age = (long) jsonObject.get("age");
-        //     JSONArray hobbies = (JSONArray) jsonObject.get("hobbies");
-
-        //     System.out.println("Name: " + name);
-        //     System.out.println("Age: " + age);
-        //     System.out.println("Hobbies:");
-        //     for (Object hobby : hobbies) {
-        //         System.out.println("- " + hobby);
-        //     }
-
-        // } catch (Exception e) {
-        //     e.printStackTrace();
-        // }
-
-        //
 
