@@ -3,9 +3,10 @@ public class Main {
 
         Solution solution = new Solution();
         InputParser parser = new InputParser();
-        //Circuit circuit = parser.parseJSON("Circuits/circuit1.json");
-        parser.parseJSON("Circuits/circuit1.json");
-        //solution.findBestFit(circuit);
+        Circuit circuit = parser.parseJSON("Circuits/circuit3.json");   
+        circuit.printCircuit();
+        //parser.parseJSON("Circuits/circuit1.json");
+        solution.findBestFit(circuit);
 
         
     }

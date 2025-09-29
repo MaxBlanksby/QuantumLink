@@ -31,12 +31,15 @@ public class InputParser {
             //         //this now iterates through each col of the custom circuit they have made
             //     }
             // }
+
+            
+            int holder = Integer.MIN_VALUE;
             for (int depth = 0; depth < root.get("cols").size(); depth++) {
                 JsonNode colNode = root.get("cols").get(depth);
                 Column col = convertJsonNodeToColumn(colNode, depth); 
                 columns.add(col);
 
-                int holder = Integer.MIN_VALUE;
+                
                 int numQubits = col.getCells().size();
 
                 if (numQubits > holder) {

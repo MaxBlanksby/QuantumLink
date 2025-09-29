@@ -11,21 +11,22 @@ public class Solution {
     // needs to take in the circuit too
     public void findBestFit(Circuit circuit) {
 
-        ArrayList<Integer> ListOfCosts = new ArrayList<>();
+        ArrayList<Layout> layouts = new ArrayList<>();
+        layouts.add(new HeavyHex());
+        layouts.add(new Mesh());
 
+        int bestCost = Integer.MAX_VALUE;
+        Layout bestLayout = null;
 
+        for (Layout layout : layouts) {
+            int cost = circuit.getCost(new SuperconductingQubit(), layout);
+            if (cost < bestCost) {
+            bestCost = cost;
+            bestLayout = layout;
+            }
+        }
 
-
-        ListOfCosts.add(circuit.getCost(new SuperconductingQubit(), new HeavyHex()));
-        ListOfCosts.add(circuit.getCost(new SuperconductingQubit(), new Mesh()));
-
-
-
-        int placeOfCost = Collections.min(ListOfCosts);
-        int cost = ListOfCosts.get(placeOfCost);
-
-
-        System.out.println("The best cost is: " + cost);
-        //System.out.println("The best layout is: " + ListOfCosts.get(placeOfCost));
+        System.out.println("The best cost is: " + bestCost);
+        System.out.println("The best layout is: " + (bestLayout != null ? bestLayout.getClass().getSimpleName() : "None"));
     }
 }

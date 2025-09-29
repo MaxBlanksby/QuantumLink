@@ -24,24 +24,33 @@ public class Circuit {
 
 
     public int getCost(QubitType qubit, Layout layout) {
+        //qubit.getNativeGatesSet();
 
-        
-        // qubit.getNativeGatesSet();
-
-        // int cost = 0;
-        // int gateSize = 0;
-        // int largestNumNeighbor = layout.getMostNumOfNeighbors();
-        // for (int i = 0; i < gates.size(); i++) {
-        //    Gate gate = gates.get(i);
-        //     gateSize = gate.inputQubits.size() + gate.outputQubits.size();
-        //    if (gateSize > largestNumNeighbor) {
-        //     cost += 6 * (gateSize - largestNumNeighbor);
-        //    } 
-
-        // }
-
-       return 0;
+        int cost = 0;
+        int largestNumNeighbor = layout.getMostNumOfNeighbors();
+        if (numQubits > largestNumNeighbor) {
+             cost += 6 * (numQubits - largestNumNeighbor);
+            }
+       return cost;
 
     }
+
+    public void printCircuit() {
+        System.out.println("Circuit ID: " + circuitId);
+        System.out.println("Number of Qubits: " + numQubits);
+        System.out.println("Columns:");
+        for (int i = 0; i < columns.size(); i++) {
+            Column col = columns.get(i);
+            System.out.print("Depth " + i + ": ");
+            for (int j = 0; j < col.getCells().size(); j++) {
+                Gate gate = col.getCells().get(j).getGate();
+                System.out.print(gate.getGateType() + " ");
+            }
+            System.out.println();
+        }
+    }
+
+
+
 }
 
