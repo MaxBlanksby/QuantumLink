@@ -3,9 +3,8 @@ public class Main {
 
         Solution solution = new Solution();
         InputParser parser = new InputParser();
-        Circuit circuit = parser.parseJSON("Circuits/circuit3.json");   
-        circuit.printCircuit();
-        //parser.parseJSON("Circuits/circuit1.json");
+        Circuit circuit = parser.parseJSON("Circuits/circuit1.json");   
+        //circuit.printCircuit();
         solution.findBestFit(circuit);
 
         

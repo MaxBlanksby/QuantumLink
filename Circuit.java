@@ -27,11 +27,25 @@ public class Circuit {
 
         int cost = 0;
         int largestNumNeighbor = layout.getMostNumOfNeighbors();
-        if (numQubits > largestNumNeighbor) {
-             cost += 6 * (numQubits - largestNumNeighbor);
-            }
-       return cost;
 
+
+        for (Column col : columns) {
+            for (Cell cell : col.getCells()) {
+                Gate gate = cell.getGate();
+                //System.out.println(cell.getGate().getGateType());
+                if (gate.getGateType().equals("•") || gate.getGateType().equals("◦")) {
+                    //System.out.println("Found a CNOT");
+                    if (col.getCells().size() > largestNumNeighbor) {
+                        System.out.println(col.toString());
+                        System.out.println("Found a gate with more neighbors");
+                        cost += 6 * (col.getCells().size() - largestNumNeighbor);
+                    }
+                }
+            }
+        }
+
+
+        return cost;
     }
 
     public void printCircuit() {

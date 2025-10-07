@@ -25,7 +25,7 @@ public class Column {
     public String toString() {
         StringBuilder sb = new StringBuilder("[ ");
         for (Cell c : cells) {
-            sb.append(c.toString()).append(" ");
+            sb.append(c.getGate().toString()).append(" ");
         }
         sb.append("]");
         return sb.toString();
