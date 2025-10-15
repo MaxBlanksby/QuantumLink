@@ -9,6 +9,6 @@ public class SuperconductingQubit implements QubitType {
 
     @Override
     public List<String> getNativeGatesSet() {
-        throw new UnsupportedOperationException("Unimplemented method 'getNativeGatesSet'");
+        return List.of("H", "X", "Y", "Z", "S", "T", "CX", "CNOT", "•", "◦");
     }
  }

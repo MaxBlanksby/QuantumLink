@@ -23,28 +23,25 @@ public class Circuit {
 
 
     public int getCost(QubitType qubit, Layout layout) {
-        //qubit.getNativeGatesSet();
-
         int cost = 0;
         int largestNumNeighbor = layout.getMostNumOfNeighbors();
 
-
-        for (Column col : columns) {
-            for (Cell cell : col.getCells()) {
+        for (int colIndex = 0; colIndex < columns.size(); colIndex++) {
+            Column col = columns.get(colIndex);
+            for (int cellIndex = 0; cellIndex < col.getCells().size(); cellIndex++) {
+                Cell cell = col.getCells().get(cellIndex);
                 Gate gate = cell.getGate();
-                //System.out.println(cell.getGate().getGateType());
+                // if (!qubit.getNativeGatesSet().contains(gate.getGateType())) {
+                //     cost += 10;
+                // }
                 if (gate.getGateType().equals("•") || gate.getGateType().equals("◦")) {
-                    //System.out.println("Found a CNOT");
-                    if (col.getCells().size() > largestNumNeighbor) {
-                        System.out.println(col.toString());
-                        System.out.println("Found a gate with more neighbors");
-                        cost += 6 * (col.getCells().size() - largestNumNeighbor);
-                    }
+                    col.containsMultiQubitGate = true;
                 }
-            }
+            }      
+            if (col.containsMultiQubitGate && col.getCells().size() > largestNumNeighbor) {
+                cost += 6 * (col.getCells().size() - largestNumNeighbor);
+            }    
         }
-
-
         return cost;
     }
 

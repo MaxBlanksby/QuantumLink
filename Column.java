@@ -4,10 +4,9 @@ import java.util.List;
 public class Column {
 
 
-
-
     List<Cell> cells = new ArrayList<>();
 
+    boolean containsMultiQubitGate;
 
     Column() {
         this.cells = new ArrayList<>();

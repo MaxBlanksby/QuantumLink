@@ -4,10 +4,8 @@ public class Main {
         Solution solution = new Solution();
         InputParser parser = new InputParser();
         Circuit circuit = parser.parseJSON("Circuits/circuit1.json");   
-        //circuit.printCircuit();
-        solution.findBestFit(circuit);
-
-        
+        circuit.printCircuit();
+        solution.findBestFit(circuit);  
     }
     
 }
