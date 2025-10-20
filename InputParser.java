@@ -76,6 +76,21 @@ public class InputParser {
     public Gate convertJsonNodeToGate(JsonNode gateNode) {
         return new Gate(gateNode.asText());
     }
+
+    public ArrayList<Circuit> parseCircuitIntoPeicesByDepth(Circuit circuit, int numPieces) {
+        int sizeOfPiece = circuit.columns.size() / numPieces;
+        ArrayList<Circuit> pieces = new ArrayList<>();
+
+
+        for (int i = 0; i < numPieces; i++){
+            Circuit piece = new Circuit();
+            piece.columns = new ArrayList<>(circuit.columns.subList(i * sizeOfPiece, (i + 1) * sizeOfPiece));
+            pieces.add(piece);
+        }
+
+        return pieces;
+
+    }
 }
 
     

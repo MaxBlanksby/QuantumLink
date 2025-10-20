@@ -6,8 +6,6 @@ public interface Layout {
     
     int getMostNumOfNeighbors();
 
-    int getNeighborsAtPlace(int id);
-
     int getNumQubits();
 
 
