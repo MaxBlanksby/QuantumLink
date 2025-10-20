@@ -91,6 +91,9 @@ public class InputParser {
         return pieces;
 
     }
+    public void ConvertCircuitToJSON(){
+        // to be implemented later
+    }
 }
 
     
