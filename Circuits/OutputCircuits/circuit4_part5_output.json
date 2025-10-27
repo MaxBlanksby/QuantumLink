@@ -1,0 +1,1 @@
+[{"cells":[{"gate":{"gateType":"X"},"depthx":8,"depthy":0},{"gate":{"gateType":"X"},"depthx":8,"depthy":1},{"gate":{"gateType":"X"},"depthx":8,"depthy":2}]},{"cells":[{"gate":{"gateType":"H"},"depthx":9,"depthy":0},{"gate":{"gateType":"H"},"depthx":9,"depthy":1},{"gate":{"gateType":"H"},"depthx":9,"depthy":2}]}]

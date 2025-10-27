@@ -23,7 +23,7 @@ public class InputParser {
             
             JsonNode root = mapper.readTree(new File(filePath));
             Circuit circuit = new Circuit();
-            circuit.circuitId = filePath;
+            circuit.circuitId = filePath.substring(filePath.lastIndexOf("/") + 1, filePath.lastIndexOf(".json"));
             // needs to work for all custon circuits
             // for (int i = 0; i < root.get("gates").size(); i++) {
             //     for (JsonNode col : root.get("gates").get(i).get("cols")) {
@@ -77,22 +77,16 @@ public class InputParser {
         return new Gate(gateNode.asText());
     }
 
-    public ArrayList<Circuit> parseCircuitIntoPeicesByDepth(Circuit circuit, int numPieces) {
+    public ArrayList<Circuit> parseCircuitIntoPiecesByDepth(Circuit circuit, int numPieces) {
         int sizeOfPiece = circuit.columns.size() / numPieces;
         ArrayList<Circuit> pieces = new ArrayList<>();
-
-
         for (int i = 0; i < numPieces; i++){
             Circuit piece = new Circuit();
             piece.columns = new ArrayList<>(circuit.columns.subList(i * sizeOfPiece, (i + 1) * sizeOfPiece));
+            piece.circuitId = circuit.circuitId + "_part" + (i + 1);
             pieces.add(piece);
         }
-
         return pieces;
-
-    }
-    public void ConvertCircuitToJSON(){
-        // to be implemented later
     }
 }
 

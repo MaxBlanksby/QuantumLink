@@ -1,4 +1,8 @@
 import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Circuit {
 
@@ -57,6 +61,17 @@ public class Circuit {
                 System.out.print(gate.getGateType() + " ");
             }
             System.out.println();
+        }
+    }
+
+
+    public void convertToJson(String filePath) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            mapper.writeValue(new File(filePath + circuitId + "_output.json"), columns);
+            System.out.println("Circuit successfully converted to JSON.");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
