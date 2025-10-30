@@ -61,9 +61,7 @@ public class InputParser {
     public Column convertJsonNodeToColumn(JsonNode colNode , int depthX) {
         Column col = new Column();
         for(int l = 0; l < colNode.size(); l++){
-            //System.out.println(colNode.get(l));
             Gate gate = convertJsonNodeToGate(colNode.get(l));
-            //System.out.println(gate);
             int depthY = l;
             Cell cell = new Cell(gate, depthX, depthY);
 
