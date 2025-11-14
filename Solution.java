@@ -26,6 +26,10 @@ public class Solution {
         }
 
         System.out.println("The best cost is: " + bestCost);
-        System.out.println("The best layout is: " + (bestLayout != null ? bestLayout.getClass().getSimpleName() : "None"));
+        if (bestLayout != null) {
+            System.out.println("The best layout is: " + bestLayout.getClass().getSimpleName());
+        } else {
+            System.out.println("The best layout is: None");
+        }   
     }
 }

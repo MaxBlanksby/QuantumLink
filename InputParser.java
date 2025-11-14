@@ -20,7 +20,6 @@ public class InputParser {
         //ArrayList<Column> customGateList = new ArrayList<>();
         ArrayList<Column> columns = new ArrayList<>();
         try {
-            
             JsonNode root = mapper.readTree(new File(filePath));
             Circuit circuit = new Circuit();
             circuit.circuitId = filePath.substring(filePath.lastIndexOf("/") + 1, filePath.lastIndexOf(".json"));
@@ -75,6 +74,31 @@ public class InputParser {
         return new Gate(gateNode.asText());
     }
 
+
+    public ArrayList<Circuit> findParallelismOpportunities(Circuit circuit) {
+        ArrayList<Circuit> parallelCircuits = new ArrayList<>();
+        ArrayList<Column> columns = circuit.columns;
+
+        for (int i = 0; i < columns.size(); i++) {
+            Column col = columns.get(i);
+            col.toString();
+
+            if (col.containsMultiQubitGate()) {
+
+                break;
+                // Handle multi-qubit gate
+            } else {
+                // Handle single-qubit gates
+                col.toString();
+            }
+
+            // Analyze the column to find parallelism opportunities
+            // This is a placeholder for actual logic
+        }
+        // Implement your logic to find parallelism opportunities here
+        return parallelCircuits;
+    }
+
     public ArrayList<Circuit> parseCircuitIntoPiecesByDepth(Circuit circuit, int numPieces) {
         int sizeOfPiece = circuit.columns.size() / numPieces;
         ArrayList<Circuit> pieces = new ArrayList<>();
@@ -86,6 +110,12 @@ public class InputParser {
         }
         return pieces;
     }
+    public ArrayList<Circuit> parseCircuitIntoPiecesByHeuristic(Circuit circuit, int numPieces) {
+        ArrayList<Circuit> pieces = new ArrayList<>();
+        // Implement your heuristic-based partitioning logic here
+        return pieces;
+    }
+
 }
 
     

@@ -29,4 +29,8 @@ public class Column {
         sb.append("]");
         return sb.toString();
     }
+
+    public boolean containsMultiQubitGate() {
+        return containsMultiQubitGate;
+    }
 }
