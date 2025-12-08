@@ -3,6 +3,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class InputParser {
@@ -75,30 +76,6 @@ public class InputParser {
     }
 
 
-    public ArrayList<Circuit> findParallelismOpportunities(Circuit circuit) {
-        ArrayList<Circuit> parallelCircuits = new ArrayList<>();
-        ArrayList<Column> columns = circuit.columns;
-
-        for (int i = 0; i < columns.size(); i++) {
-            Column col = columns.get(i);
-            col.toString();
-
-            if (col.containsMultiQubitGate()) {
-
-                break;
-                // Handle multi-qubit gate
-            } else {
-                // Handle single-qubit gates
-                col.toString();
-            }
-
-            // Analyze the column to find parallelism opportunities
-            // This is a placeholder for actual logic
-        }
-        // Implement your logic to find parallelism opportunities here
-        return parallelCircuits;
-    }
-
     public ArrayList<Circuit> parseCircuitIntoPiecesByDepth(Circuit circuit, int numPieces) {
         int sizeOfPiece = circuit.columns.size() / numPieces;
         ArrayList<Circuit> pieces = new ArrayList<>();
@@ -110,17 +87,53 @@ public class InputParser {
         }
         return pieces;
     }
-    public ArrayList<Circuit> parseCircuitIntoPiecesByHeuristic(Circuit circuit, int numPieces) {
-        ArrayList<Circuit> pieces = new ArrayList<>();
-        // Implement your heuristic-based partitioning logic here
-        return pieces;
-    }
-
-}
-
     
 
+    public Graph createBasicGraphFromCircuit(Circuit circuit) {
+        Graph graph = new Graph();
+        Node previousNode = null;
+        Cell previousCell = null;
+        int timeSlice = 0;
+
+
+        // add all the nodes
+        for (Column col : circuit.columns) {
+            if(col.containsMultiQubitGate) {
 
 
 
+                ArrayList<Link> sourceLinks = new ArrayList<Link>();
+                ArrayList<Link> targetLinks = new ArrayList<Link>();
 
+
+                for (int i = 0; i < col.getCells().size(); i++) {
+                    Cell cell = col.getCells().get(i);
+                    graph.addNode(timeSlice,cell.getGate().getGateType(), targetLinks, sourceLinks);
+
+
+                    if (previousCell != null) {
+                        graph.addNode(timeSlice, cell.getGate().getGateType(), targetLinks, sourceLinks);
+
+                    } 
+                    previousCell = cell;
+                }
+            } else {
+                for (Cell cell : col.getCells()) {
+                    graph.addNode(timeSlice, cell.getGate().getGateType(), null, null);
+                }
+            }
+            timeSlice++;
+        }
+        return graph;
+    }
+
+
+    public Graph createGraphFromCircuit(Circuit circuit) {
+        // Placeholder for a more detailed graph creation logic
+        return createBasicGraphFromCircuit(circuit);
+    }
+
+    public void exportGraphToJSON(Graph graph, String filePath) {
+        // Placeholder for JSON export logic
+    }   
+}

@@ -11,5 +11,4 @@ public class NeutralAtomQubit implements QubitType {
     public List<String> getNativeGatesSet() {
         return List.of("X", "Y", "Z", "H", "CX");
     }
-
 }
