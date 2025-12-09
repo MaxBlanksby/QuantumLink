@@ -1,8 +1,12 @@
+package Main;
 import java.util.ArrayList;
 
 public class Node {
 
-    private int id;
+    private int colId;
+    
+    private int rowId;
+
 
     private String label;
 
@@ -11,15 +15,20 @@ public class Node {
     private ArrayList<Link> sourceLinks;
 
 
-    public Node(int id, String label, ArrayList<Link> targetLinks, ArrayList<Link> sourceLinks) {
-        this.id = id;
+    public Node(int rowId, int colId, String label, ArrayList<Link> targetLinks, ArrayList<Link> sourceLinks) {
+        this.rowId = rowId;
+        this.colId = colId;
         this.label = label;
         this.targetLinks = targetLinks;
         this.sourceLinks = sourceLinks;
     }
 
-    public int getId() {
-        return id;
+    public int getColId() {
+        return colId;
+    }
+
+    public int getRowId() {
+        return rowId;
     }
 
     public String getLabel() {

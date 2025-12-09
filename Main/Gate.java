@@ -1,3 +1,4 @@
+package Main;
 public class Gate {
 
     private String gateType;

@@ -1,3 +1,4 @@
+package QubitModalities;
 import java.util.List;
 
 public class NeutralAtomQubit implements QubitType {

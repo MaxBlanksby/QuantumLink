@@ -1,3 +1,4 @@
+package Layout;
 public class HeavyHex implements Layout{
 
     @Override

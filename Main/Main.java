@@ -1,17 +1,10 @@
-import java.util.ArrayList;
-
+package Main;
 public class Main {
     public static void main(String[] args) {
 
         Solution solution = new Solution();
-        InputParser parser = new InputParser();
-        DisplayUtil displayUtil = new DisplayUtil();
+        Util parser = new Util();
         Circuit circuit = parser.parseJSON("Circuits/TestCircuits/circuit4.json");
-        
-
-        
-        displayUtil.displayGraph(parser.createGraphFromCircuit(circuit));
-
         //ArrayList<Circuit> pieces = parser.parseCircuitIntoPiecesByDepth(circuit, 5);
 
 

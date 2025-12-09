@@ -1,3 +1,4 @@
+package Main;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +9,11 @@ public class Column {
 
     boolean containsMultiQubitGate;
 
+    ArrayList<Integer> multiQubitGateDepth;
+
     Column() {
         this.cells = new ArrayList<>();
+        this.multiQubitGateDepth = new ArrayList<>();
     }
 
     public void addCell(Cell cell) {

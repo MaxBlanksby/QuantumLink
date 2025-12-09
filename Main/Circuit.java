@@ -1,7 +1,11 @@
+package Main;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import Layout.Layout;
+import QubitModalities.QubitType;
 
 public class Circuit {
 

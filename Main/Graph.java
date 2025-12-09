@@ -1,4 +1,4 @@
-import java.lang.reflect.Array;
+package Main;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +16,8 @@ public class Graph {
         return originCircuit;
     }
 
-    public void addNode(int id, String label, ArrayList<Link> targetLinks, ArrayList<Link> sourceLinks) {
-        Node node = new Node(id, label, targetLinks, sourceLinks);
+    public void addNode(int colId, int rowId, String label, ArrayList<Link> targetLinks, ArrayList<Link> sourceLinks) {
+        Node node = new Node(colId, rowId, label, targetLinks, sourceLinks);
         nodes.add(node);
     }
 
@@ -29,5 +29,12 @@ public class Graph {
 
     public List<Node> getNodes() {
         return nodes;
+    }
+
+
+    public Node addCellToGraph(Cell cell) {
+        Node node = new Node(cell.depthx,cell.depthy,cell.getGate().toString(), new ArrayList<>(), new ArrayList<>());
+        nodes.add(node);
+        return node;
     }
 }

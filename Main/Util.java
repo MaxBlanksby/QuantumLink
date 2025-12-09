@@ -1,12 +1,12 @@
+package Main;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class InputParser {
+public class Util {
 
 
     // does nothing rn (need to work on it)
@@ -30,15 +30,11 @@ public class InputParser {
             //         //this now iterates through each col of the custom circuit they have made
             //     }
             // }
-
-
             int holder = Integer.MIN_VALUE;
             for (int depth = 0; depth < root.get("cols").size(); depth++) {
                 JsonNode colNode = root.get("cols").get(depth);
                 Column col = convertJsonNodeToColumn(colNode, depth); 
                 columns.add(col);
-
-                
                 int numQubits = col.getCells().size();
 
                 if (numQubits > holder) {
@@ -64,6 +60,12 @@ public class InputParser {
             Gate gate = convertJsonNodeToGate(colNode.get(l));
             int depthY = l;
             Cell cell = new Cell(gate, depthX, depthY);
+            if(gate.getGateType().equals("•")) {
+                col.containsMultiQubitGate = true;
+                col.multiQubitGateDepth = depthY;
+            } else {
+                col.containsMultiQubitGate = false;
+            }
 
             col.addCell(cell);
         }
@@ -91,39 +93,32 @@ public class InputParser {
 
     public Graph createBasicGraphFromCircuit(Circuit circuit) {
         Graph graph = new Graph();
-        Node previousNode = null;
-        Cell previousCell = null;
-        int timeSlice = 0;
+
+        for (int q = 0; q < circuit.columns.size(); q++) {
+            Column col = circuit.columns.get(q);
+            
+            ArrayList<Integer> depthOfMultiQubitGate = col.multiQubitGateDepth;
+            if (col.containsMultiQubitGate) {
 
 
-        // add all the nodes
-        for (Column col : circuit.columns) {
-            if(col.containsMultiQubitGate) {
 
 
-
-                ArrayList<Link> sourceLinks = new ArrayList<Link>();
-                ArrayList<Link> targetLinks = new ArrayList<Link>();
-
-
-                for (int i = 0; i < col.getCells().size(); i++) {
-                    Cell cell = col.getCells().get(i);
-                    graph.addNode(timeSlice,cell.getGate().getGateType(), targetLinks, sourceLinks);
-
-
-                    if (previousCell != null) {
-                        graph.addNode(timeSlice, cell.getGate().getGateType(), targetLinks, sourceLinks);
-
-                    } 
-                    previousCell = cell;
-                }
-            } else {
                 for (Cell cell : col.getCells()) {
-                    graph.addNode(timeSlice, cell.getGate().getGateType(), null, null);
+
+
+                    Node node = graph.addCellToGraph(cell);
+                    node.addSourceLink(null);
+
+
                 }
+
+                
+
             }
-            timeSlice++;
+            for (Cell cell : col.getCells()) {
+            }
         }
+
         return graph;
     }
 

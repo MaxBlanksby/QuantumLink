@@ -1,15 +1,16 @@
+package QubitModalities;
 import java.util.List;
 
-public class TrappedIonQubit implements QubitType{
+public class PhotonicQubit implements QubitType {
 
     @Override
     public String getTypeName() {
-        return "Trapped Ion Qubit";
+        return "Photonic Qubit";
     }
 
     @Override
     public List<String> getNativeGatesSet() {
         return List.of("X", "Y", "Z", "H", "CX");
     }
-    
+
 }

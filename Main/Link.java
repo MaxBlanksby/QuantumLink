@@ -1,6 +1,11 @@
+package Main;
 public class Link {
     
+
+    // where every node gets its information from
     private Node source;
+
+    // where every node sends its information to
     private Node target;
 
     public Link(Node source, Node target) {
