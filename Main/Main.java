@@ -3,9 +3,20 @@ public class Main {
     public static void main(String[] args) {
 
         Solution solution = new Solution();
-        Util parser = new Util();
-        Circuit circuit = parser.parseJSON("Circuits/TestCircuits/circuit4.json");
-        //ArrayList<Circuit> pieces = parser.parseCircuitIntoPiecesByDepth(circuit, 5);
+        
+        Util util = new Util();
+        Circuit circuit = util.parseJSON("Circuits/TestCircuits/circuit4.json");
+        Graph basicGraph = util.createBasicGraphFromCircuit(circuit);
+        Graph optimizedGraph = util.createGraphFromCircuit(circuit);
+        
+
+        util.convertGraphToJSON(basicGraph, "Graphs/basicGraph.json");
+        util.convertGraphToJSON(optimizedGraph, "Graphs/optimizedGraph.json");
+
+
+
+
+        //ArrayList<Circuit> pieces = util.parseCircuitIntoPiecesByDepth(circuit, 5);
 
 
         //circuit.convertToJson("Circuits/OutputCircuits/");

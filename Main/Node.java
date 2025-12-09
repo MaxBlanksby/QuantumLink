@@ -35,13 +35,15 @@ public class Node {
         return label;
     }
 
-    public void addTargetLink(Link link) {
-        this.targetLinks.add(link);
+    public void addTargetLink(Node targetNode) {
+        this.targetLinks.add(new Link(this, targetNode));
     }
 
-    public void addSourceLink(Link link) {
-        this.sourceLinks.add(link);
+    public void addSourceLink(Node sourceNode) {
+        this.sourceLinks.add(new Link(sourceNode, this));
     }
+
+    
     
 
     public ArrayList<Link> getTargetLinks() {

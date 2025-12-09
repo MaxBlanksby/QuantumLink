@@ -32,9 +32,18 @@ public class Graph {
     }
 
 
-    public Node addCellToGraph(Cell cell) {
+    public void addCellToGraph(Cell cell) {
         Node node = new Node(cell.depthx,cell.depthy,cell.getGate().toString(), new ArrayList<>(), new ArrayList<>());
         nodes.add(node);
-        return node;
+    }
+
+
+    public Node getNodeByPosition(int colId, int rowId) {
+        for (Node node : nodes) {
+            if (node.getColId() == colId && node.getRowId() == rowId) {
+                return node;
+            }
+        }
+        return null;
     }
 }

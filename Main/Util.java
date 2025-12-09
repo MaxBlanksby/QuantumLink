@@ -61,8 +61,10 @@ public class Util {
             int depthY = l;
             Cell cell = new Cell(gate, depthX, depthY);
             if(gate.getGateType().equals("•")) {
-                col.containsMultiQubitGate = true;
-                col.multiQubitGateDepth = depthY;
+                if(col.containsMultiQubitGate != true){
+                    col.containsMultiQubitGate = true;
+                }
+                col.multiQubitGateDepth.add(depthY);
             } else {
                 col.containsMultiQubitGate = false;
             }
@@ -96,26 +98,19 @@ public class Util {
 
         for (int q = 0; q < circuit.columns.size(); q++) {
             Column col = circuit.columns.get(q);
-            
-            ArrayList<Integer> depthOfMultiQubitGate = col.multiQubitGateDepth;
             if (col.containsMultiQubitGate) {
-
-
-
-
+                ArrayList<Integer> depthOfMultiQubitGate = col.multiQubitGateDepth;
                 for (Cell cell : col.getCells()) {
-
-
-                    Node node = graph.addCellToGraph(cell);
-                    node.addSourceLink(null);
-
-
+                    graph.addCellToGraph(cell);
                 }
-
-                
-
+                for (Integer depth : depthOfMultiQubitGate) {
+                    for (Node node : graph.getNodes()) {
+                        node.addSourceLink(graph.getNodeByPosition(node.getColId(), depth));
+                    }
+                }
             }
             for (Cell cell : col.getCells()) {
+                graph.addCellToGraph(cell);
             }
         }
 
@@ -128,7 +123,8 @@ public class Util {
         return createBasicGraphFromCircuit(circuit);
     }
 
-    public void exportGraphToJSON(Graph graph, String filePath) {
+    
+    public void convertGraphToJSON(Graph graph, String filePath) {
         // Placeholder for JSON export logic
     }   
 }
