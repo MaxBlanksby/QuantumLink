@@ -2,8 +2,8 @@ package Main;
 public class Main {
     public static void main(String[] args) {
 
-        Solution solution = new Solution();
-        
+        //Solution solution = new Solution();
+
         Util util = new Util();
         Circuit circuit = util.parseJSON("Circuits/TestCircuits/circuit4.json");
         Graph basicGraph = util.createBasicGraphFromCircuit(circuit);
