@@ -53,4 +53,14 @@ public class Node {
     public ArrayList<Link> getSourceLinks() {
         return sourceLinks;
     }
+    @Override
+    public String toString() {
+        return "Node{" +
+                "colId=" + colId +
+                ", rowId=" + rowId +
+                ", label='" + label + '\'' +
+                ", targetLinks=" + targetLinks +
+                ", sourceLinks=" + sourceLinks +
+                '}';
+    }
 }

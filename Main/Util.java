@@ -3,6 +3,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -61,14 +62,9 @@ public class Util {
             int depthY = l;
             Cell cell = new Cell(gate, depthX, depthY);
             if(gate.getGateType().equals("•")) {
-                if(col.containsMultiQubitGate != true){
-                    col.containsMultiQubitGate = true;
-                }
+                col.containsMultiQubitGate = true;
                 col.multiQubitGateDepth.add(depthY);
-            } else {
-                col.containsMultiQubitGate = false;
             }
-
             col.addCell(cell);
         }
         return col;
@@ -95,29 +91,34 @@ public class Util {
 
     public Graph createBasicGraphFromCircuit(Circuit circuit) {
         Graph graph = new Graph();
-
+        Graph holderGraph = new Graph();
         for (int q = 0; q < circuit.columns.size(); q++) {
             Column col = circuit.columns.get(q);
             if (col.containsMultiQubitGate) {
                 ArrayList<Integer> depthOfMultiQubitGate = col.multiQubitGateDepth;
                 for (Cell cell : col.getCells()) {
                     graph.addCellToGraph(cell);
+                    holderGraph.addCellToGraph(cell);
                 }
                 for (Integer depth : depthOfMultiQubitGate) {
-                    for (Node node : graph.getNodes()) {
+                    for (Node node : holderGraph.getNodes()) {
                         node.addSourceLink(graph.getNodeByPosition(node.getColId(), depth));
+                        //System.out.println(node.getSourceLinks().get(0).toString());
                     }
+                    
+                }
+                holderGraph.clearGraph();
+            }else {
+                for (Cell cell : col.getCells()) {
+                    graph.addCellToGraph(cell);
                 }
             }
-            for (Cell cell : col.getCells()) {
-                graph.addCellToGraph(cell);
-            }
         }
-
         return graph;
     }
 
 
+    
     public Graph createGraphFromCircuit(Circuit circuit) {
         // Placeholder for a more detailed graph creation logic
         return createBasicGraphFromCircuit(circuit);
@@ -125,6 +126,23 @@ public class Util {
 
     
     public void convertGraphToJSON(Graph graph, String filePath) {
-        // Placeholder for JSON export logic
-    }   
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            //graph.getNodes().get(0).
+            mapper.writeValue(new File(filePath), graph.getNodes());   
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void convertToJson(Circuit circuit, String filePath) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            mapper.writeValue(new File(filePath + circuit.getCircuitId() + "_output.json"), circuit.columns);
+            System.out.println("Circuit successfully converted to JSON.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

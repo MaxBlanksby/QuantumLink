@@ -46,4 +46,7 @@ public class Graph {
         }
         return null;
     }
+    public void clearGraph() {
+        this.nodes.clear();
+    }
 }

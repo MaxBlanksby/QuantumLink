@@ -13,6 +13,7 @@ public class Column {
 
     Column() {
         this.cells = new ArrayList<>();
+        this.containsMultiQubitGate = false;
         this.multiQubitGateDepth = new ArrayList<>();
     }
 

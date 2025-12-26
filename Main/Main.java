@@ -7,11 +7,12 @@ public class Main {
         Util util = new Util();
         Circuit circuit = util.parseJSON("Circuits/TestCircuits/circuit4.json");
         Graph basicGraph = util.createBasicGraphFromCircuit(circuit);
-        Graph optimizedGraph = util.createGraphFromCircuit(circuit);
+        //Graph optimizedGraph = util.createGraphFromCircuit(circuit);
         
 
         util.convertGraphToJSON(basicGraph, "Graphs/basicGraph.json");
-        util.convertGraphToJSON(optimizedGraph, "Graphs/optimizedGraph.json");
+        System.out.println(basicGraph.getNodeByPosition(0,5));
+        //util.convertGraphToJSON(optimizedGraph, "Graphs/optimizedGraph.json");
 
 
 

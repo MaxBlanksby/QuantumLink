@@ -20,4 +20,12 @@ public class Link {
     public Node getTarget() {
         return target;
     }
+
+    @Override
+    public String toString() {
+        return "Link{" +
+                //"source=" + source +
+                //", target=" + target +
+                '}';
+    }
 }

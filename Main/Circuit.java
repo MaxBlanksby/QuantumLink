@@ -66,19 +66,5 @@ public class Circuit {
             System.out.println();
         }
     }
-
-
-    public void convertToJson(String filePath) {
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            mapper.writeValue(new File(filePath + circuitId + "_output.json"), columns);
-            System.out.println("Circuit successfully converted to JSON.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
 }
 

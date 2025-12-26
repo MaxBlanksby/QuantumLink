@@ -9,10 +9,8 @@ import QubitModalities.SuperconductingQubit;
 
 public class Solution {
 
-
-
-
-    // needs to take in the circuit too
+    // work on later
+    
     public void findBestFit(Circuit circuit) {
 
         ArrayList<Layout> layouts = new ArrayList<>();
