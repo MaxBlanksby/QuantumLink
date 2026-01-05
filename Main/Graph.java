@@ -12,13 +12,13 @@ public class Graph {
         this.originCircuit = new Circuit();
     }
 
-    public Circuit getOriginCircuit() {
-        return originCircuit;
-    }
-
     public void addNode(int colId, int rowId, String label, ArrayList<Link> targetLinks, ArrayList<Link> sourceLinks) {
         Node node = new Node(colId, rowId, label, targetLinks, sourceLinks);
         nodes.add(node);
+    }
+
+    public void addNode(Node node) {
+        this.nodes.add(node);
     }
 
     public void addLink(Node source, Node target) {
@@ -27,17 +27,14 @@ public class Graph {
         target.getSourceLinks().add(link);
     }
 
-    public List<Node> getNodes() {
-        return nodes;
-    }
-
-
     public void addCellToGraph(Cell cell) {
         Node node = new Node(cell.depthx,cell.depthy,cell.getGate().toString(), new ArrayList<>(), new ArrayList<>());
         nodes.add(node);
     }
 
-
+    public List<Node> getNodes() {
+        return nodes;
+    }
     public Node getNodeByPosition(int colId, int rowId) {
         for (Node node : nodes) {
             if (node.getColId() == colId && node.getRowId() == rowId) {
@@ -48,5 +45,22 @@ public class Graph {
     }
     public void clearGraph() {
         this.nodes.clear();
+    }
+
+    public Circuit getOriginCircuit() {
+        return originCircuit;
+    }
+
+    public void setOriginCircuit(Circuit originCircuit) {
+        this.originCircuit = originCircuit;
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Node node : nodes) {
+            sb.append(node.toString()).append("\n");
+        }
+        return sb.toString();
     }
 }
