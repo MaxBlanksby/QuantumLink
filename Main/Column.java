@@ -7,19 +7,13 @@ public class Column {
 
     List<Cell> cells = new ArrayList<>();
 
-    boolean containsMultiQubitGate;
-
-    ArrayList<Integer> multiQubitGateDepth;
+    ArrayList<Integer> controlBitsDepth;
 
     Column() {
         this.cells = new ArrayList<>();
-        this.containsMultiQubitGate = false;
-        this.multiQubitGateDepth = new ArrayList<>();
+        this.controlBitsDepth = new ArrayList<>();
     }
 
-    public void addCell(Cell cell) {
-        cells.add(cell);
-    }
 
     public List<Cell> getCells() {
         return cells;
@@ -34,8 +28,7 @@ public class Column {
         sb.append("]");
         return sb.toString();
     }
-
-    public boolean containsMultiQubitGate() {
-        return containsMultiQubitGate;
+    public void addCell(Cell cell) {
+        this.cells.add(cell);
     }
 }

@@ -7,7 +7,6 @@ public class Node {
     
     private int rowId;
 
-
     private String label;
 
     private ArrayList<Link> targetLinks;
@@ -23,6 +22,8 @@ public class Node {
         this.sourceLinks = sourceLinks;
     }
 
+
+    // fetchers
     public int getColId() {
         return colId;
     }
@@ -34,18 +35,6 @@ public class Node {
     public String getLabel() {
         return label;
     }
-
-    public void addTargetLink(Node targetNode) {
-        this.targetLinks.add(new Link(this, targetNode));
-    }
-
-    public void addSourceLink(Node sourceNode) {
-        this.sourceLinks.add(new Link(sourceNode, this));
-    }
-
-    
-    
-
     public ArrayList<Link> getTargetLinks() {
         return targetLinks;
     }
@@ -53,6 +42,15 @@ public class Node {
     public ArrayList<Link> getSourceLinks() {
         return sourceLinks;
     }
+    // adders 
+    public void addTargetLink(Node targetNode) {
+        this.targetLinks.add(new Link(this, targetNode));
+    }
+
+    public void addSourceLink(Node sourceNode) {
+        this.sourceLinks.add(new Link(sourceNode, this));
+    }
+    
     @Override
     public String toString() {
         return "Node{" +

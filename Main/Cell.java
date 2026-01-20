@@ -25,8 +25,4 @@ public class Cell {
     public int getDepthy() {
         return depthy;
     }
-
-
-
-
 }

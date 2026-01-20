@@ -13,7 +13,10 @@ public class Circuit {
 
     ArrayList<Column> columns;
 
+    ArrayList<Integer> initializedQubitValues;
+
     String circuitId;
+
 
 
 
@@ -26,30 +29,7 @@ public class Circuit {
         this.numQubits = 0;
         this.circuitId = "";
         this.columns = new ArrayList<>();
-    }
-
-
-    public int getCost(QubitType qubit, Layout layout) {
-        int cost = 0;
-        int largestNumNeighbor = layout.getMostNumOfNeighbors();
-
-        for (int colIndex = 0; colIndex < columns.size(); colIndex++) {
-            Column col = columns.get(colIndex);
-            for (int cellIndex = 0; cellIndex < col.getCells().size(); cellIndex++) {
-                Cell cell = col.getCells().get(cellIndex);
-                Gate gate = cell.getGate();
-                // if (!qubit.getNativeGatesSet().contains(gate.getGateType())) {
-                //     cost += 10;
-                // }
-                if (gate.getGateType().equals("•") || gate.getGateType().equals("◦")) {
-                    col.containsMultiQubitGate = true;
-                }
-            }      
-            if (col.containsMultiQubitGate && col.getCells().size() > largestNumNeighbor) {
-                cost += 6 * (col.getCells().size() - largestNumNeighbor);
-            }    
-        }
-        return cost;
+        this.initializedQubitValues = new ArrayList<>();
     }
 
     public void printCircuit() {
@@ -65,6 +45,11 @@ public class Circuit {
             }
             System.out.println();
         }
+    }
+
+    public int getCost(QubitType qubit, Layout layout) {
+        int cost = 0;
+        return cost;
     }
 }
 
