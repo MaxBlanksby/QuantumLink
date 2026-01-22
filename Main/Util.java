@@ -25,7 +25,6 @@ public class Util {
         ArrayList<Integer> initializedQubitValues = new ArrayList<>();
         try {
             //old root area
-            JsonNode root = mapper.readTree(new File(filePath));
             Circuit circuit = new Circuit();
             circuit.circuitId = filePath.substring(filePath.lastIndexOf("/") + 1, filePath.lastIndexOf(".json"));
             System.out.println("Parsing Circuit ID: " + circuit.circuitId);
