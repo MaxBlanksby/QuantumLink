@@ -48,6 +48,7 @@ public class Circuit {
     }
 
     public int getCost(QubitType qubit, Layout layout) {
+        // will be implemented later
         int cost = 0;
         return cost;
     }
