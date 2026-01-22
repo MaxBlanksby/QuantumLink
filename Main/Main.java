@@ -5,13 +5,17 @@ public class Main {
         //Solution solution = new Solution();
 
         Util util = new Util();
-        Circuit circuit = util.parseJSON("Circuits/TestCircuits/circuit4.json");
-        Graph basicGraph = util.createBasicGraphFromCircuit(circuit);
-        //Graph optimizedGraph = util.createGraphFromCircuit(circuit);
+        Circuit circuit = util.parseJSON("Circuits/RawInputCircuits/circuitTest.json");
+        circuit.printCircuit();
+        // circuit.initializedQubitValues.forEach(value -> System.out.print(value + " "));
+        // System.out.println();
+        Graph graph = util.createGraphFromCircuit(circuit);
+        graph.displayGraph();
+        util.convertGraphToJSON(graph, "Graphs/TestGraph.json");
         
-
-        util.convertGraphToJSON(basicGraph, "Graphs/basicGraph.json");
-        System.out.println(basicGraph.getNodeByPosition(0,5));
+        
+        
+        //System.out.println(basicGraph.getNodeByPosition(0,5));
         //util.convertGraphToJSON(optimizedGraph, "Graphs/optimizedGraph.json");
 
 

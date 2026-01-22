@@ -1,0 +1,128 @@
+[
+  {
+    "colId": 0,
+    "rowId": 0,
+    "label": "•",
+    "targetLinks": [
+      {
+        "sourceColId": 0,
+        "sourceRowId": 0,
+        "targetColId": 0,
+        "targetRowId": 1
+      },
+      { "sourceColId": 0, "sourceRowId": 0, "targetColId": 0, "targetRowId": 2 }
+    ],
+    "sourceLinks": []
+  },
+  {
+    "colId": 1,
+    "rowId": 0,
+    "label": "1",
+    "targetLinks": [
+      { "sourceColId": 1, "sourceRowId": 0, "targetColId": 2, "targetRowId": 0 }
+    ],
+    "sourceLinks": [
+      { "sourceColId": 1, "sourceRowId": 2, "targetColId": 1, "targetRowId": 0 }
+    ]
+  },
+  {
+    "colId": 2,
+    "rowId": 0,
+    "label": "X",
+    "targetLinks": [
+      { "sourceColId": 2, "sourceRowId": 0, "targetColId": 2, "targetRowId": 1 }
+    ],
+    "sourceLinks": [
+      { "sourceColId": 1, "sourceRowId": 0, "targetColId": 2, "targetRowId": 0 }
+    ]
+  },
+  {
+    "colId": 0,
+    "rowId": 1,
+    "label": "1",
+    "targetLinks": [],
+    "sourceLinks": [
+      { "sourceColId": 0, "sourceRowId": 0, "targetColId": 0, "targetRowId": 1 }
+    ]
+  },
+  {
+    "colId": 1,
+    "rowId": 1,
+    "label": "1",
+    "targetLinks": [],
+    "sourceLinks": [
+      { "sourceColId": 1, "sourceRowId": 2, "targetColId": 1, "targetRowId": 1 }
+    ]
+  },
+  {
+    "colId": 2,
+    "rowId": 1,
+    "label": "•",
+    "targetLinks": [
+      { "sourceColId": 2, "sourceRowId": 1, "targetColId": 3, "targetRowId": 1 }
+    ],
+    "sourceLinks": [
+      { "sourceColId": 2, "sourceRowId": 0, "targetColId": 2, "targetRowId": 1 }
+    ]
+  },
+  {
+    "colId": 3,
+    "rowId": 1,
+    "label": "X",
+    "targetLinks": [],
+    "sourceLinks": [
+      { "sourceColId": 2, "sourceRowId": 1, "targetColId": 3, "targetRowId": 1 }
+    ]
+  },
+  {
+    "colId": 0,
+    "rowId": 2,
+    "label": "•",
+    "targetLinks": [
+      { "sourceColId": 0, "sourceRowId": 2, "targetColId": 1, "targetRowId": 2 }
+    ],
+    "sourceLinks": [
+      { "sourceColId": 0, "sourceRowId": 0, "targetColId": 0, "targetRowId": 2 }
+    ]
+  },
+  {
+    "colId": 1,
+    "rowId": 2,
+    "label": "X",
+    "targetLinks": [
+      {
+        "sourceColId": 1,
+        "sourceRowId": 2,
+        "targetColId": 1,
+        "targetRowId": 0
+      },
+      {
+        "sourceColId": 1,
+        "sourceRowId": 2,
+        "targetColId": 1,
+        "targetRowId": 1
+      },
+      { "sourceColId": 1, "sourceRowId": 2, "targetColId": 1, "targetRowId": 3 }
+    ],
+    "sourceLinks": [
+      { "sourceColId": 0, "sourceRowId": 2, "targetColId": 1, "targetRowId": 2 }
+    ]
+  },
+  {
+    "colId": 0,
+    "rowId": 3,
+    "label": "•",
+    "targetLinks": [],
+    "sourceLinks": []
+  },
+  {
+    "colId": 1,
+    "rowId": 3,
+    "label": "•",
+    "targetLinks": [],
+    "sourceLinks": [
+      { "sourceColId": 1, "sourceRowId": 2, "targetColId": 1, "targetRowId": 3 }
+    ]
+  },
+  { "colId": 2, "rowId": 3, "label": "X", "targetLinks": [], "sourceLinks": [] }
+]
