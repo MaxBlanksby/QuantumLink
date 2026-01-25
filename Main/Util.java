@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Util {
@@ -183,9 +184,9 @@ public class Util {
         for (int colIdx = 0; colIdx < circuit.columns.size(); colIdx++) {
             Column col = circuit.columns.get(colIdx);
             
-            // If this column has control bits
+            // If this column (time slice) has control bits
             if (col.controlBitsDepth.size() > 0) {
-                // Link control bits to all other nodes in the same column
+                // Link control bits to all other nodes in the same column (same time slice, different qubits)
                 for (int controlBitDepth : col.controlBitsDepth) {
                     Node controlNode = graph.getNodeByPosition(colIdx, controlBitDepth);
                     if (controlNode != null) {
@@ -202,17 +203,23 @@ public class Util {
                 }
             }
             
-            // For any non-control bit, look at the next column at the same depth
+            // For any non-control bit, look at the next column (time slice) at the same row (qubit)
             // If the next node is a control bit, add it as a target link
+            // Skip if the current cell's gate is "1" (identity) - no connection needed
             if (colIdx < circuit.columns.size() - 1) {
                 Column nextCol = circuit.columns.get(colIdx + 1);
                 
                 for (Cell cell : col.getCells()) {
+                    // Skip if this cell's gate is "1" (identity gate) - don't draw forward connections
+                    if (cell.getGate().getGateType().equals("1")) {
+                        continue;
+                    }
+                    
                     // If this cell is not a control bit
                     if (!col.controlBitsDepth.contains(cell.depthy)) {
                         Node currentNode = graph.getNodeByPosition(colIdx, cell.depthy);
                         
-                        // Check if the next column has a control bit at the same depth
+                        // Check if the next column (time slice) has a control bit at the same row (qubit)
                         if (nextCol.controlBitsDepth.contains(cell.depthy)) {
                             Node nextControlNode = graph.getNodeByPosition(colIdx + 1, cell.depthy);
                             if (currentNode != null && nextControlNode != null) {
@@ -232,8 +239,15 @@ public class Util {
     public void convertGraphToJSON(Graph graph, String filePath) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            //graph.getNodes().get(0).
-            mapper.writeValue(new File(filePath), graph.getNodes());   
+            // Sort nodes by column (time slice) first, then by row (qubit)
+            List<Node> sortedNodes = new ArrayList<>(graph.getNodes());
+            sortedNodes.sort((a, b) -> {
+                if (a.getColId() != b.getColId()) {
+                    return Integer.compare(a.getColId(), b.getColId());
+                }
+                return Integer.compare(a.getRowId(), b.getRowId());
+            });
+            mapper.writeValue(new File(filePath), sortedNodes);   
          } catch (IOException e) {
             e.printStackTrace();
         }
