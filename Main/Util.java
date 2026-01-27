@@ -94,12 +94,35 @@ public class Util {
                         }
                     }
                     if (hasCustomGate) {
-                        // Expand the custom gate by adding all its columns
+                        // Find the position (offset) of the custom gate in the column
+                        int gateOffset = 0;
+                        for (int j = 0; j < col.size(); j++) {
+                            String gateStr = col.get(j).asText();
+                            if (customGateMap.containsKey(gateStr)) {
+                                gateOffset = j;
+                                break;
+                            }
+                        }
+                        
+                        // Expand the custom gate by adding all its columns with proper offset
                         JsonNode customCols = customGateMap.get(customGateId);
                         for (int k = 0; k < customCols.size(); k++) {
-                            expandedCols.add(customCols.get(k));
+                            JsonNode customCol = customCols.get(k);
+                            ArrayNode offsetCol = mapper.createArrayNode();
+                            
+                            // Add 1s for the offset positions before the custom gate
+                            for (int p = 0; p < gateOffset; p++) {
+                                offsetCol.add(1);
+                            }
+                            
+                            // Add the custom gate's column elements
+                            for (int p = 0; p < customCol.size(); p++) {
+                                offsetCol.add(customCol.get(p));
+                            }
+                            
+                            expandedCols.add(offsetCol);
                         }
-                        System.out.println("  Expanded custom gate: " + customGateId);
+                        System.out.println("  Expanded custom gate: " + customGateId + " at offset " + gateOffset);
                     } else {
                         // Regular column, just add it
                         expandedCols.add(col);
@@ -108,6 +131,11 @@ public class Util {
                 // Create the new circuit JSON structure
                 ObjectNode expandedCircuit = mapper.createObjectNode();
                 expandedCircuit.set("cols", expandedCols);
+                
+                // Copy over the init array if it exists
+                if (root.get("init") != null) {
+                    expandedCircuit.set("init", root.get("init"));
+                }
                 
                 // Write to file
                 String baseFileName = filePath.substring(filePath.lastIndexOf("/") + 1, filePath.lastIndexOf(".json"));
