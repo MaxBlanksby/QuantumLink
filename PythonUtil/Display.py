@@ -76,7 +76,7 @@ def draw_graph(graph):
 
 if __name__ == "__main__":
     # Load the graph from the TestGraph.json file
-    graph_path = Path(__file__).parent.parent / "Graphs" / "TestGraph.json"
+    graph_path = Path(__file__).parent.parent / "Graphs" / "debugGraph.json"
     print(f"Loading graph from: {graph_path}")
     
     G = load_graph_from_json(graph_path)

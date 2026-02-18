@@ -26,7 +26,7 @@ public class Graph {
     }
 
     public void addNode(Cell cell) {
-        Node node = new Node(cell.depthx,cell.depthy,cell.getGate().toString(), new ArrayList<>(), new ArrayList<>());
+        Node node = new Node(cell.depthy, cell.depthx, cell.getGate().toString(), new ArrayList<>(), new ArrayList<>());
         nodes.add(node);
     }
 

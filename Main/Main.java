@@ -5,20 +5,20 @@ public class Main {
         //Solution solution = new Solution();
 
         Util util = new Util();
-        Circuit circuit = util.parseJSON("Circuits/RawInputCircuits/circuitTest.json");
+        Circuit circuit = util.parseJSON("Circuits/RawInputCircuits/circuitDebug.json");
         circuit.printCircuit();
         // circuit.initializedQubitValues.forEach(value -> System.out.print(value + " "));
         // System.out.println();
         Graph graph = util.createGraphFromCircuit(circuit);
         graph.displayGraph();
-        util.convertGraphToJSON(graph, "Graphs/TestGraph.json");
+        util.convertGraphToJSON(graph, "Graphs/debugGraph.json");
+
+        
         
         
         
         //System.out.println(basicGraph.getNodeByPosition(0,5));
         //util.convertGraphToJSON(optimizedGraph, "Graphs/optimizedGraph.json");
-
-
 
 
         //ArrayList<Circuit> pieces = util.parseCircuitIntoPiecesByDepth(circuit, 5);

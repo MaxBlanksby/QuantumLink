@@ -144,9 +144,12 @@ public class Util {
                 System.out.println("  Expanded circuit saved to: " + newFilePath);
                 
             } else {
-                // No custom gates, just copy the file
-                System.out.println("No custom gates detected - using original circuit");
-                newFilePath = filePath;
+                // No custom gates, copy to InputCircuits and continue
+                System.out.println("No custom gates detected - copying to InputCircuits");
+                String baseFileName = filePath.substring(filePath.lastIndexOf("/") + 1, filePath.lastIndexOf(".json"));
+                newFilePath = "Circuits/InputCircuits/" + baseFileName + "_final.json";
+                mapper.writerWithDefaultPrettyPrinter().writeValue(new File(newFilePath), root);
+                System.out.println("  Circuit copied to: " + newFilePath);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -200,6 +203,16 @@ public class Util {
     public Graph createGraphFromCircuit(Circuit circuit) {
         Graph graph = new Graph();
 
+        // Pad columns so every column has numQubits cells (fill gaps with identity "1" gates)
+        for (int colIdx = 0; colIdx < circuit.columns.size(); colIdx++) {
+            Column col = circuit.columns.get(colIdx);
+            while (col.getCells().size() < circuit.numQubits) {
+                int nextDepthy = col.getCells().size();
+                Cell identityCell = new Cell(new Gate("1"), colIdx, nextDepthy);
+                col.addCell(identityCell);
+            }
+        }
+
         // First pass: Create all nodes and add them to the graph
         for (int colIdx = 0; colIdx < circuit.columns.size(); colIdx++) {
             Column col = circuit.columns.get(colIdx);
@@ -214,45 +227,55 @@ public class Util {
             
             // If this column (time slice) has control bits
             if (col.controlBitsDepth.size() > 0) {
-                // Link control bits to all other nodes in the same column (same time slice, different qubits)
+                // Link control bits to target gates (non-control, non-identity) in the same column
                 for (int controlBitDepth : col.controlBitsDepth) {
                     Node controlNode = graph.getNodeByPosition(colIdx, controlBitDepth);
                     if (controlNode != null) {
-                        // Link this control node to all non-control nodes in the same column
+                        // Link this control node only to actual target gates (not 1s, not other controls)
                         for (Cell cell : col.getCells()) {
-                            if (!col.controlBitsDepth.contains(cell.depthy)) {
-                                Node targetNode = graph.getNodeByPosition(colIdx, cell.depthy);
-                                if (targetNode != null) {
-                                    graph.addLink(controlNode, targetNode);
-                                }
+                            // Skip if it's a control bit or an identity gate
+                            if (col.controlBitsDepth.contains(cell.depthy)) {
+                                continue;
+                            }
+                            if (cell.getGate().getGateType().equals("1")) {
+                                continue;
+                            }
+                            Node targetNode = graph.getNodeByPosition(colIdx, cell.depthy);
+                            if (targetNode != null) {
+                                graph.addLink(controlNode, targetNode);
                             }
                         }
                     }
                 }
             }
             
-            // For any non-control bit, look at the next column (time slice) at the same row (qubit)
-            // If the next node is a control bit, add it as a target link
-            // Skip if the current cell's gate is "1" (identity) - no connection needed
+            // For any active gate (non-identity), look at the next column (time slice) at the same row (qubit)
+            // If the next node is also a non-identity gate, add a forward link
             if (colIdx < circuit.columns.size() - 1) {
                 Column nextCol = circuit.columns.get(colIdx + 1);
                 
                 for (Cell cell : col.getCells()) {
-                    // Skip if this cell's gate is "1" (identity gate) - don't draw forward connections
+                    // Skip identity gates - they don't connect to anything
                     if (cell.getGate().getGateType().equals("1")) {
                         continue;
                     }
                     
-                    // If this cell is not a control bit
-                    if (!col.controlBitsDepth.contains(cell.depthy)) {
-                        Node currentNode = graph.getNodeByPosition(colIdx, cell.depthy);
-                        
-                        // Check if the next column (time slice) has a control bit at the same row (qubit)
-                        if (nextCol.controlBitsDepth.contains(cell.depthy)) {
-                            Node nextControlNode = graph.getNodeByPosition(colIdx + 1, cell.depthy);
-                            if (currentNode != null && nextControlNode != null) {
-                                graph.addLink(currentNode, nextControlNode);
-                            }
+                    Node currentNode = graph.getNodeByPosition(colIdx, cell.depthy);
+                    
+                    // Find the corresponding cell in the next column at the same row
+                    Cell nextCell = null;
+                    for (Cell nc : nextCol.getCells()) {
+                        if (nc.depthy == cell.depthy) {
+                            nextCell = nc;
+                            break;
+                        }
+                    }
+                    
+                    // If next cell exists and is not an identity gate, connect forward
+                    if (nextCell != null && !nextCell.getGate().getGateType().equals("1")) {
+                        Node nextNode = graph.getNodeByPosition(colIdx + 1, cell.depthy);
+                        if (currentNode != null && nextNode != null) {
+                            graph.addLink(currentNode, nextNode);
                         }
                     }
                 }

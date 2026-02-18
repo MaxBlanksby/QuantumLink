@@ -1,0 +1,230 @@
+[
+  {
+    "colId": 0,
+    "rowId": 0,
+    "label": "•",
+    "targetLinks": [
+      { "sourceColId": 0, "sourceRowId": 0, "targetColId": 0, "targetRowId": 1 }
+    ],
+    "sourceLinks": []
+  },
+  {
+    "colId": 0,
+    "rowId": 1,
+    "label": "X",
+    "targetLinks": [
+      { "sourceColId": 0, "sourceRowId": 1, "targetColId": 1, "targetRowId": 1 }
+    ],
+    "sourceLinks": [
+      { "sourceColId": 0, "sourceRowId": 0, "targetColId": 0, "targetRowId": 1 }
+    ]
+  },
+  {
+    "colId": 0,
+    "rowId": 2,
+    "label": "1",
+    "targetLinks": [],
+    "sourceLinks": []
+  },
+  {
+    "colId": 0,
+    "rowId": 3,
+    "label": "1",
+    "targetLinks": [],
+    "sourceLinks": []
+  },
+  {
+    "colId": 0,
+    "rowId": 4,
+    "label": "1",
+    "targetLinks": [],
+    "sourceLinks": []
+  },
+  {
+    "colId": 0,
+    "rowId": 5,
+    "label": "1",
+    "targetLinks": [],
+    "sourceLinks": []
+  },
+  {
+    "colId": 0,
+    "rowId": 6,
+    "label": "1",
+    "targetLinks": [],
+    "sourceLinks": []
+  },
+  {
+    "colId": 1,
+    "rowId": 0,
+    "label": "1",
+    "targetLinks": [],
+    "sourceLinks": []
+  },
+  {
+    "colId": 1,
+    "rowId": 1,
+    "label": "•",
+    "targetLinks": [
+      { "sourceColId": 1, "sourceRowId": 1, "targetColId": 1, "targetRowId": 2 }
+    ],
+    "sourceLinks": [
+      { "sourceColId": 0, "sourceRowId": 1, "targetColId": 1, "targetRowId": 1 }
+    ]
+  },
+  {
+    "colId": 1,
+    "rowId": 2,
+    "label": "X",
+    "targetLinks": [],
+    "sourceLinks": [
+      { "sourceColId": 1, "sourceRowId": 1, "targetColId": 1, "targetRowId": 2 }
+    ]
+  },
+  {
+    "colId": 1,
+    "rowId": 3,
+    "label": "1",
+    "targetLinks": [],
+    "sourceLinks": []
+  },
+  {
+    "colId": 1,
+    "rowId": 4,
+    "label": "1",
+    "targetLinks": [],
+    "sourceLinks": []
+  },
+  {
+    "colId": 1,
+    "rowId": 5,
+    "label": "1",
+    "targetLinks": [],
+    "sourceLinks": []
+  },
+  {
+    "colId": 1,
+    "rowId": 6,
+    "label": "1",
+    "targetLinks": [],
+    "sourceLinks": []
+  },
+  {
+    "colId": 2,
+    "rowId": 0,
+    "label": "1",
+    "targetLinks": [],
+    "sourceLinks": []
+  },
+  {
+    "colId": 2,
+    "rowId": 1,
+    "label": "1",
+    "targetLinks": [],
+    "sourceLinks": []
+  },
+  {
+    "colId": 2,
+    "rowId": 2,
+    "label": "1",
+    "targetLinks": [],
+    "sourceLinks": []
+  },
+  {
+    "colId": 2,
+    "rowId": 3,
+    "label": "•",
+    "targetLinks": [
+      { "sourceColId": 2, "sourceRowId": 3, "targetColId": 2, "targetRowId": 5 }
+    ],
+    "sourceLinks": []
+  },
+  {
+    "colId": 2,
+    "rowId": 4,
+    "label": "•",
+    "targetLinks": [
+      { "sourceColId": 2, "sourceRowId": 4, "targetColId": 2, "targetRowId": 5 }
+    ],
+    "sourceLinks": []
+  },
+  {
+    "colId": 2,
+    "rowId": 5,
+    "label": "X",
+    "targetLinks": [
+      { "sourceColId": 2, "sourceRowId": 5, "targetColId": 3, "targetRowId": 5 }
+    ],
+    "sourceLinks": [
+      {
+        "sourceColId": 2,
+        "sourceRowId": 3,
+        "targetColId": 2,
+        "targetRowId": 5
+      },
+      { "sourceColId": 2, "sourceRowId": 4, "targetColId": 2, "targetRowId": 5 }
+    ]
+  },
+  {
+    "colId": 2,
+    "rowId": 6,
+    "label": "1",
+    "targetLinks": [],
+    "sourceLinks": []
+  },
+  {
+    "colId": 3,
+    "rowId": 0,
+    "label": "1",
+    "targetLinks": [],
+    "sourceLinks": []
+  },
+  {
+    "colId": 3,
+    "rowId": 1,
+    "label": "1",
+    "targetLinks": [],
+    "sourceLinks": []
+  },
+  {
+    "colId": 3,
+    "rowId": 2,
+    "label": "1",
+    "targetLinks": [],
+    "sourceLinks": []
+  },
+  {
+    "colId": 3,
+    "rowId": 3,
+    "label": "1",
+    "targetLinks": [],
+    "sourceLinks": []
+  },
+  {
+    "colId": 3,
+    "rowId": 4,
+    "label": "1",
+    "targetLinks": [],
+    "sourceLinks": []
+  },
+  {
+    "colId": 3,
+    "rowId": 5,
+    "label": "•",
+    "targetLinks": [
+      { "sourceColId": 3, "sourceRowId": 5, "targetColId": 3, "targetRowId": 6 }
+    ],
+    "sourceLinks": [
+      { "sourceColId": 2, "sourceRowId": 5, "targetColId": 3, "targetRowId": 5 }
+    ]
+  },
+  {
+    "colId": 3,
+    "rowId": 6,
+    "label": "X",
+    "targetLinks": [],
+    "sourceLinks": [
+      { "sourceColId": 3, "sourceRowId": 5, "targetColId": 3, "targetRowId": 6 }
+    ]
+  }
+]
