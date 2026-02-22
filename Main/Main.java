@@ -11,29 +11,19 @@ public class Main {
         // System.out.println();
         Graph graph = util.createGraphFromCircuit(circuit);
         graph.displayGraph();
-        util.convertGraphToJSON(graph, "Graphs/debugGraph.json");
-
-        
-        
-        
-        
-        //System.out.println(basicGraph.getNodeByPosition(0,5));
-        //util.convertGraphToJSON(optimizedGraph, "Graphs/optimizedGraph.json");
+        util.convertGraphToJSON(graph, "Graphs/DebugGraph.json");
 
 
-        //ArrayList<Circuit> pieces = util.parseCircuitIntoPiecesByDepth(circuit, 5);
-
-
-        //circuit.convertToJson("Circuits/OutputCircuits/");
-        //circuit.printCircuit();
-
-        //solution.findBestFit(circuit);
-
-        // for (Circuit piece : pieces) {
-        //     //piece.convertToJson("Circuits/OutputCircuits/");
-        //     piece.printCircuit();
-        //     solution.findBestFit(piece);
+        // Sudo code
+        //ArrayList<Graph> connectedComponents = graph.connectedComponents();
+        // for (Graph component : connectedComponents) {
+        //     component.displayGraph();
         //     System.out.println("-----");
+        //     component.determinebestLayout();
+        //     System.out.println("-----");
+        //     component.SABRE
+        //     System.out.println("-----");
+        //     component.determinebestModality();
         // }
     }
 

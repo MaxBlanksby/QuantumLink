@@ -100,8 +100,23 @@ public class Graph {
         return sb.toString();
     }
 
-    public Graph connectedComponents() {
+    public ArrayList<Graph> connectedComponents() {
+        for (Node node : nodes) {
+            for (Link link : node.getSourceLinks()) {
+                Node source = link.getSource();
+                processNode(node, source);
+            }
+            for (Link link : node.getTargetLinks()) {
+
+                Node target = link.getTarget();
+                processNode(node, target);
+            }
+        }
         // work on later
-        return this; // Placeholder return
+        return new ArrayList<>(); // Placeholder return
+    }
+    public boolean processNode(Node node1, Node node2) {
+
+        return false; // Placeholder return
     }
 }

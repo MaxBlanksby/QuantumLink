@@ -12,6 +12,8 @@ public class Node {
     private ArrayList<Link> targetLinks;
 
     private ArrayList<Link> sourceLinks;
+    
+    Boolean isVisited;
 
 
     public Node(int rowId, int colId, String label, ArrayList<Link> targetLinks, ArrayList<Link> sourceLinks) {
