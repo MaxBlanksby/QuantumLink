@@ -12,6 +12,7 @@ public class Main {
         Graph graph = util.createGraphFromCircuit(circuit);
         graph.displayGraph();
         util.convertGraphToJSON(graph, "Graphs/DebugGraph.json");
+        graph.connectedComponents();
 
 
         // Sudo code

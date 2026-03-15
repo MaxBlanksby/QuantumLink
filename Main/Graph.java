@@ -101,22 +101,51 @@ public class Graph {
     }
 
     public ArrayList<Graph> connectedComponents() {
-        for (Node node : nodes) {
-            for (Link link : node.getSourceLinks()) {
-                Node source = link.getSource();
-                processNode(node, source);
-            }
-            for (Link link : node.getTargetLinks()) {
+        ArrayList<Graph> graphs = new ArrayList<>();
 
-                Node target = link.getTarget();
-                processNode(node, target);
+        // Reset visited flags
+        for (Node node : nodes) {
+            node.isVisited = false;
+        }
+
+        for (Node node : nodes) {
+            // Skip identity nodes — they have no connections and aren't real gates
+            if ("1".equals(node.getLabel())) {
+                node.isVisited = true;
+                continue;
+            }
+            if (!node.isVisited) {
+                Graph component = new Graph();
+                ArrayList<Node> queue = new ArrayList<>();
+                queue.add(node);
+                node.isVisited = true;
+
+                while (!queue.isEmpty()) {
+                    Node current = queue.remove(0);
+                    component.addNode(current);
+
+                    for (Link link : current.getSourceLinks()) {
+                        Node neighbor = link.getSource();
+                        if (!neighbor.isVisited) {
+                            neighbor.isVisited = true;
+                            queue.add(neighbor);
+                        }
+                    }
+                    for (Link link : current.getTargetLinks()) {
+                        Node neighbor = link.getTarget();
+                        if (!neighbor.isVisited) {
+                            neighbor.isVisited = true;
+                            queue.add(neighbor);
+                        }
+                    }
+                }        
+                System.out.println("=== Connected Component " + (graphs.size() + 1) + " ===");
+                component.displayGraph();
+                graphs.add(component);
             }
         }
-        // work on later
-        return new ArrayList<>(); // Placeholder return
-    }
-    public boolean processNode(Node node1, Node node2) {
 
-        return false; // Placeholder return
+        System.out.println("Total connected components: " + graphs.size());
+        return graphs;
     }
 }
