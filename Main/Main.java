@@ -23,6 +23,10 @@ public class Main {
         System.out.println("\n=== Routed Circuit ===");
         routed.printCircuit();
 
+        // Build and display graph from routed circuit
+        Graph routedGraph = util.createGraphFromCircuit(routed);
+        routedGraph.displayGraph();
+
         // Sudo code
         //ArrayList<Graph> connectedComponents = graph.connectedComponents();
         // for (Graph component : connectedComponents) {
