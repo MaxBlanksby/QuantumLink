@@ -1,5 +1,6 @@
 package Layout;
 
+import java.util.List;
 
 public interface Layout {
 
@@ -9,11 +10,5 @@ public interface Layout {
 
     int getNumQubits();
 
-
-
-
-    // find data stucture to represent the qubit layout
-
-
-
+    List<int[]> generateCouplingEdges(int numQubits);
 }

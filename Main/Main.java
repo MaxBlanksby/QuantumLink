@@ -1,4 +1,7 @@
 package Main;
+
+import Layout.Mesh;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -10,10 +13,15 @@ public class Main {
         // circuit.initializedQubitValues.forEach(value -> System.out.print(value + " "));
         // System.out.println();
         Graph graph = util.createGraphFromCircuit(circuit);
-        graph.displayGraph();
-        util.convertGraphToJSON(graph, "Graphs/DebugGraph.json");
-        graph.connectedComponents();
+        //graph.displayGraph();
+        //util.convertGraphToJSON(graph, "Graphs/DebugGraph.json");
+        //graph.connectedComponents();
 
+        // SABRE routing
+        Transpiler transpiler = new Transpiler();
+        Circuit routed = transpiler.route(circuit, new Mesh());
+        System.out.println("\n=== Routed Circuit ===");
+        routed.printCircuit();
 
         // Sudo code
         //ArrayList<Graph> connectedComponents = graph.connectedComponents();
@@ -29,4 +37,3 @@ public class Main {
     }
 
 }
-    
